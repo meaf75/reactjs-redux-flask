@@ -43,7 +43,10 @@ class AuthCollection(Resource):
         v.validate(data)
 
         if v.errors:
-            return v.errors
+            return {
+               'error': 'Invalid property',
+               'details': v.errors
+            }, 424
 
         user = get_user_by_email(data['mail'])
 
@@ -55,8 +58,7 @@ class AuthCollection(Resource):
             error_msg = 'user not found'
             event_msg = '[Not Found] Login attempt, user not found [{0}]'.format(data['mail'])
             error_code = 404
-
-        if not user.check_password(data['password']):
+        elif not user.check_password(data['password']):
             error_msg = 'Invalid password'
             event_msg = '[Login attempt] invalid password for user [{0}]'.format(data['mail'])
             error_code = 401

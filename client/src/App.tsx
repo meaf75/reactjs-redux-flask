@@ -1,9 +1,10 @@
-import React from "react";
 import { AppRouter } from "./screens/AppRouter";
 import { Provider } from "react-redux";
-import { store } from "./store";
-
+import { configureStore } from "./store";
 const App = () => {
+
+  const store = configureStore();
+  
   return (
       <Provider store={store}>
         <AppRouter />

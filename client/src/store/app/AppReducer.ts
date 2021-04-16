@@ -1,20 +1,20 @@
-import { AppState, AppActionTypes, SET_USERS, SET_USER_TO_EDIT } from './AppTypes';
+import { AppState, AppActionTypes } from './AppTypes';
 
 export const appInitialState: AppState = {    
-    users: [],
-    userToEdit: null
+    user: undefined,
+    user_auth_token: undefined
 }
 
 export const appReducer = (state: AppState = appInitialState, action: AppActionTypes): AppState => {
     const currentState = { ...state };
     
     switch (action.type) {
-        case SET_USERS: {
-            currentState.users = action.payload.data;
+        case "SET_USER": {
+            currentState.user = action.payload.data;
             break;
         }
-        case SET_USER_TO_EDIT: {
-            currentState.userToEdit = action.payload.data;
+        case "SET_USER_AUTH_TOKEN": {
+            currentState.user_auth_token = action.payload.data;
             break;
         }
         default:

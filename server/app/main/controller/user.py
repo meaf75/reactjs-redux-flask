@@ -69,7 +69,7 @@ class UserCollection(Resource):
         """
 
         if not request.json:
-            return {'error': 'data must be provided'}
+            return {'error': 'data must be provided'}, 424
 
         # Verify request content
         data = request.json
@@ -77,7 +77,10 @@ class UserCollection(Resource):
         v.validate(data)
 
         if v.errors:
-            return v.errors
+            return {
+                'error': 'Invalid property',
+                'details': v.errors
+            }, 424
 
         result = save_new_user(data)
 

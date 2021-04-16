@@ -1,13 +1,14 @@
+import { IUser } from "../../interfaces/IUser";
 import { AddElementActionType } from "../StoreTypes";
 
 export interface AppState {    
-    users: any[];
-    userToEdit: any | null;
+    user?: IUser;
+    user_auth_token?: string;
 }
 
-export const SET_USERS = 'SET_USERS';
-export const SET_USER_TO_EDIT = 'SET_USER_TO_EDIT';
+export const SET_USER = 'SET_USER';
+export const SET_USER_AUTH_TOKEN = 'SET_USER_AUTH_TOKEN';
 
 export type AppActionTypes =
-    AddElementActionType<typeof SET_USERS, any[]> |
-    AddElementActionType<typeof SET_USER_TO_EDIT, any | null> 
+    AddElementActionType<typeof SET_USER, IUser | undefined> |
+    AddElementActionType<typeof SET_USER_AUTH_TOKEN, string | undefined>
