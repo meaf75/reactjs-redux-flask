@@ -23,12 +23,14 @@
         $ pip install virtualenv
     ```
 
-
 * #### Dependencies
     1. Create and fire up your virtual environment in python3:
         ```
         $ py -3 -m venv venv
         ```
+
+### Important
+- You can find the database dub at [flask-rest-api-dumb.sql](../flask-rest-api-dumb.sql) (Database name must be "flask-rest-api" or you can configure the db uri at [config.py](./app/main/config.py)
 
 ### Start environment state
 ``
