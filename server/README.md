@@ -53,9 +53,6 @@
 - **GET** - ```/api/users - Get user based on the auth token ```
 - **POST** - ```/api/users/ - create new user ```
 - **POST** - ```/api/login - Get user auth token```
-- **DELETE** - ```/api/Category - Delete a category```
-- **GET** - ```/api/Comment - Retrieve all the stored comments```
-- **POST** - ```/api/Comment - Add new comment```
 
 ## EXTRA
 You can find more info about the endpoints by starting the server and displaying the swagger documentation or using the [postman_collection.json](./postman_collection.json)

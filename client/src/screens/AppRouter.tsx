@@ -5,34 +5,31 @@ import { createBrowserHistory } from 'history'
 import { RegisterScreen } from "./auth/RegisterScreen";
 import { ApexContainer } from "../components/atoms/ApexContainer";
 import { LoginScreen } from "./auth/LoginScreen";
+import { HomeScreen } from "./home/HomeScreen";
+import useConfigureStart from "../hooks/useConfigureStart";
 
 const newHistory = createBrowserHistory();
 
 export const AppRouter = () => {
 
-    const dispatch = useDispatch();
+    const dataLoaded = useConfigureStart();
 
-    useEffect(() => {
-        const token = localStorage.getItem('auth_token')
+    if (!dataLoaded) // Do nothing while loading
+        return null;
 
-        // if(token){
-        //   dispatch({
-        //     type: authConstants.AUTHENTICATION_SUCCESS,
-        //     payload: {
-        //       token
-        //     }
-        //   },[])
-        // }
-    }, [])
+    const content = dataLoaded ? (
+        <Router history={newHistory}>
+            <Link to="/"></Link>
+            <Route path="/" exact component={LoginScreen} />
+            <Route path="/login" exact component={LoginScreen} />
+            <Route path="/register" exact component={RegisterScreen} />
+            <Route path="/home" exact component={HomeScreen} />
+        </Router>
+    ) : null;   // Display only background while loading
 
     return (
         <ApexContainer>
-            <Router history={newHistory}>
-                <Link to="/"></Link>
-                <Route path="/" exact component={LoginScreen} />
-                <Route path="/login" exact component={LoginScreen} />
-                <Route path="/register" exact component={RegisterScreen} />
-            </Router>
+            {content}
         </ApexContainer>
     );
 }

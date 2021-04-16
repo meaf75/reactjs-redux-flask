@@ -1,20 +1,21 @@
 import { Dispatch } from "react";
-import { AppActionTypes, SET_USERS, SET_USER_TO_EDIT } from './AppTypes';
+import { IUser } from "../../interfaces/IUser";
+import { AppActionTypes } from './AppTypes';
 
-export const SetUsers = (newUsers: any[]) => async (dispatch: Dispatch<AppActionTypes>) => {
+export const SetUser = (newUser: IUser | undefined) => async (dispatch: Dispatch<AppActionTypes>) => {
     dispatch({
-        type: SET_USERS,
+        type: "SET_USER",
         payload: {
-            data: newUsers
+            data: newUser
         }
     });
 }
 
-export const SetUserToEdit = (userToEdit: any | null) => async (dispatch: Dispatch<AppActionTypes>) => {
+export const SetUserAuthToken = (value?: string) => async (dispatch: Dispatch<AppActionTypes>) => {
     dispatch({
-        type: SET_USER_TO_EDIT,
+        type: "SET_USER_AUTH_TOKEN",
         payload: {
-            data: userToEdit
+            data: value
         }
     });
 }
