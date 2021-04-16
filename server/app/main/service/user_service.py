@@ -85,9 +85,9 @@ def get_user_id_from_token(request: LocalProxy) -> str:
     return payload['sub']
 
 
-def get_user_by_email(email: str) -> User or None:
+def get_user_by_email(email: str) -> User:
     return User.query.filter_by(mail=email).first()
 
 
-def get_user_by_id(_id: int) -> User or None:
+def get_user_by_id(_id: int) -> User:
     return User.query.filter_by(id=_id).first()

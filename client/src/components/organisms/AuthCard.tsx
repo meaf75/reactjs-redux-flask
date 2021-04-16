@@ -1,9 +1,8 @@
 import { Button, Card, createStyles, Divider, makeStyles } from '@material-ui/core'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { Transition } from "react-transition-group";
-import { TweenMax } from 'gsap';
+import React from 'react';
+import { SimpleTransition } from '../molecules/SimpleTransition';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -38,8 +37,6 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const startState : gsap.TweenVars = { autoAlpha: 0, y: -50 };
-
 export interface IAuthCardProps {
     /** Modal content */
     children: React.ReactNode;
@@ -48,31 +45,15 @@ export interface IAuthCardProps {
     footerLabel: string;
     footerLinkTitle: string;
     footerLinkRoute: string;
+    isOpen: boolean;
+    onPressActionBtn: () => void;
 }
 
 export const AuthCard = (props: IAuthCardProps) => {
     const styles = useStyles()
 
-    const [firstRender, setFirstRender] = useState(false);
-
-    useEffect(() => {
-        setFirstRender(true);
-    },[])
-
     return (
-        <Transition
-            unmountOnExit
-            in={firstRender}
-            timeout={1000}
-            onEnter={(node: any) => TweenMax.set(node, startState)}
-            addEndListener={(node, done) => {
-                TweenMax.to(node, 0.5, {
-                    autoAlpha: firstRender ? 1 : 0,
-                    y: firstRender ? 0 : 50,
-                    onComplete: done
-                });
-            }}
-        >
+        <SimpleTransition isOpen={props.isOpen}>
             <MainContainer>
                 <Card className={styles.card_content}>
 
@@ -87,7 +68,14 @@ export const AuthCard = (props: IAuthCardProps) => {
                     </div>
 
                     {/* After login */}
-                    <Button variant="contained" color="primary" className={`${styles.login_btn} ${styles.margin_top_10}`}>{props.actionButtonTitle}</Button>
+                    <Button 
+                        type="submit"
+                        variant="contained" 
+                        color="primary" 
+                        className={`${styles.login_btn} ${styles.margin_top_10}`}
+                        onClick={props.onPressActionBtn}>
+                            {props.actionButtonTitle}
+                    </Button>
 
                     {/* Footer */}
                     <div className={styles.footer}>
@@ -99,7 +87,7 @@ export const AuthCard = (props: IAuthCardProps) => {
                     </div>
                 </Card>
             </MainContainer>
-        </Transition>
+        </SimpleTransition>
     )
 }
 

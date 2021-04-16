@@ -11,4 +11,7 @@ export const ApexContainer = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    
+    overflow: auto;
 `;
